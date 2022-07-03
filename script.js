@@ -124,7 +124,7 @@ function startGame() {
 
 // Controls what happens during each round
 function playRound(block) {
-    console.log("Playing round");
+    console.log("Playing round " + gameboard.round);
     const coord = block.getAttribute("id");
 
     // Makes sure each block can only be changed once
@@ -193,7 +193,9 @@ function resetGame(){
     }
     playerOne.resetMoves();
     playerTwo.resetMoves();
-    gameboard.round = 0;
 
     gameboard.updateBoard();
+    gameboard.resetRounds();
+    gameboard.round = 0;
+    reset = false;
 }
