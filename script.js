@@ -179,6 +179,7 @@ function restart() {
 
 function resetGame(){
     for(let i = 0; i < 9; i++){
+        gameboard.moves[i] = "";
         gameSpots[i].classList.remove("ingame");
     }
     playerOne.resetMoves();
