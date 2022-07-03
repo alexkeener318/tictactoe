@@ -2,6 +2,8 @@ const gameSpots = document.getElementsByClassName("block");
 const start = document.querySelector("button");
 start.addEventListener("click", startGame);
 
+
+// Controls the gameboard
 const gameboard = (() => {
     let moves = ["","","","","","","","",""];
     let round = 0;
@@ -51,6 +53,7 @@ const gameboard = (() => {
     return {moves, round, updateBoard, hasWin, checkStaleMate};
 })();
 
+// Defines each player
 const player = newSymbol => {
     let moves = [];
     const symbol = newSymbol;
@@ -71,9 +74,11 @@ const player = newSymbol => {
     return {moves,symbol, addMove, contains};
 }
 
+// Initializes each player
 const playerOne = player("X");
 const playerTwo = player("O");
 
+// Begins the game
 function startGame() {
     console.log("Starting Game...");
     for(let i = 0; i < 9; i++){
@@ -81,13 +86,18 @@ function startGame() {
     }
 }
 
+// Controls what happens during each round
 function playRound(block) {
     console.log("Playing round");
     const coord = block.getAttribute("id");
 
-    console.log(gameboard.moves);
-    
+    // Makes sure each block can only be changed once
+    for(let i = 0; i < 9; i++){
+        if(gameboard.moves[i] !== "")
+            return;
+    }     
 
+    // Determines whose turn it is, and adds appropriate symbol
     if(gameboard.round % 2){
         console.log("Adding move to player 2");
         gameboard.moves[parseInt(coord)] = playerTwo.symbol;
@@ -98,9 +108,12 @@ function playRound(block) {
         gameboard.moves[parseInt(coord)] = playerOne.symbol;
     }
     
+    // Updates gameboard
     gameboard.updateBoard();
     gameboard.round++;
+    updateBlock(block);
     
+    // Determines if someone has won
     const winOne = gameboard.hasWin(playerOne);
     const winTwo = gameboard.hasWin(playerTwo);
     gameboard.checkStaleMate();
@@ -109,4 +122,8 @@ function playRound(block) {
         return true;
     }
     return false;
+}
+
+function updateBlock(block) {
+    block.classList.add("ingame");
 }

@@ -56,6 +56,11 @@ button:hover {
     filter: brightness(300%);
 }
 
+.ingame:hover {
+    cursor: default;
+    filter: none;
+}
+
 .top {
     border-top: none;
 }
