@@ -14,6 +14,15 @@ const gameboard = (() => {
         for(let i = 0; i < 9; i++){
             gameSpots[i].textContent = moves[i];
         }
+        setRounds(round+1);
+    }
+    
+    const setRounds = num =>{
+        round = num;
+    }
+
+    const resetRounds = () =>{
+        setRounds(0);
     }
 
     const hasWin = player => {
@@ -48,13 +57,17 @@ const gameboard = (() => {
     }
 
     const checkStaleMate = () => {
-        if(round === 8 && !hasWin(playerOne) && !hasWin(playerTwo)){
+        console.log("Checking for stalemate"+ "  Round currently is: " + round);
+        console.log(round === 9);
+        console.log(!hasWin(playerOne));
+        console.log(!hasWin(playerTwo) + "\n\n");
+        if(round === 9 && !hasWin(playerOne) && !hasWin(playerTwo)){
             return true;
         } 
         return false;
     }
 
-    return {moves, round, updateBoard, hasWin, checkStaleMate};
+    return {moves, round, updateBoard, hasWin, checkStaleMate, resetRounds};
 })();
 
 // Defines each player
@@ -68,7 +81,7 @@ const player = newSymbol => {
 
     const contains = num => {
         for(let i = 0; i < moves.length; i++){
-            if(moves[i] === num){
+            if(moves[i] === parseInt(num)){
                 return true;
             }
         }
@@ -132,7 +145,7 @@ function playRound(block) {
     // Updates gameboard
     gameboard.updateBoard();
     gameboard.round++;
-    updateBlock(block);
+    block.classList.add("ingame");
     
     // Determines if someone has won
     const winOne = gameboard.hasWin(playerOne);
@@ -147,10 +160,6 @@ function playRound(block) {
     else if(noWinner){
         staleMate();
     }
-}
-
-function updateBlock(block) {
-    block.classList.add("ingame");
 }
 
 function winner(player){
