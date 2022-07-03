@@ -51,6 +51,11 @@ button:hover {
     line-height: 175px;
 }
 
+.block:hover {
+    cursor: pointer;
+    filter: brightness(300%);
+}
+
 .top {
     border-top: none;
 }
