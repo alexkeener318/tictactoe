@@ -32,7 +32,6 @@ const gameboard = (() => {
             const two = i+1;
             const three = i+2;
             if(player.contains(one) && player.contains(two) &&player.contains(three)){
-                console.log("Win across: " + one + " " + two + " " + three + "Ok done");
                 return true;
             }
        }
@@ -42,7 +41,6 @@ const gameboard = (() => {
             const two = i+3;
             const three = i+6;
             if(player.contains(one) && player.contains(two) &&player.contains(three)){
-                console.log("Win down: " + one + " " + two + " " + three + "Ok done");
                 return true;
             }
         }    
@@ -57,10 +55,6 @@ const gameboard = (() => {
     }
 
     const checkStaleMate = () => {
-        console.log("Checking for stalemate"+ "  Round currently is: " + round);
-        console.log(round === 9);
-        console.log(!hasWin(playerOne));
-        console.log(!hasWin(playerTwo) + "\n\n");
         if(round === 9 && !hasWin(playerOne) && !hasWin(playerTwo)){
             return true;
         } 
@@ -92,7 +86,6 @@ const player = newSymbol => {
     }
 
     const resetMoves = () => {
-        console.log(this);
         ohno();
         return this.moves;
     }
